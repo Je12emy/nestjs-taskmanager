@@ -23,15 +23,10 @@ export class TasksController {
   // Nest will look for the TaskService object or create, then it will assign it as an argument, it will now become a property in this class
   constructor(private taskService: TasksService) {}
 
-  // @Get()
-  // getTasks(@Query(ValidationPipe) filterDto: GetTaskFilterDto): Task[] {
-
-  //   if (Object.keys(filterDto).length) {
-  //     return this.taskService.getTasksWithFilters(filterDto);
-  //   }
-
-  //   return this.taskService.getAllTasks();
-  // }
+  @Get()
+  async getTasks(@Query(ValidationPipe) filterDto: GetTaskFilterDto) {
+    return await this.taskService.getAllTasks(filterDto);
+  }
 
   @Get('/:id') // Tell nest to extact this parameter
   getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {

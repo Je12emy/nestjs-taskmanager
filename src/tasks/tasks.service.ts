@@ -13,29 +13,10 @@ export class TasksService {
   constructor(
     @InjectRepository(TaskRepository) private taskRepository: TaskRepository,
   ) {}
-  // private tasks: Task[] = [];
 
-  // getAllTasks(): Task[] {
-  //   return this.tasks;
-  // }
-
-  // getTasksWithFilters(filterDto: GetTaskFilterDto): Task[] {
-  //   const { search, status } = filterDto;
-  //   let tasks = this.getAllTasks();
-
-  //   if (status) {
-  //     tasks = tasks.filter((task) => task.status === status);
-  //   }
-
-  //   if (search) {
-  //     tasks = tasks.filter(
-  //       (task) =>
-  //         task.title.includes(search) || task.description.includes(search),
-  //     );
-  //   }
-
-  //   return tasks;
-  // }
+  getAllTasks(filterDto: GetTaskFilterDto): Promise<Task[]> {
+    return this.taskRepository.getTasks(filterDto);
+  }
 
   async getTaskById(id: number): Promise<Task> {
     const found = await this.taskRepository.findOne(id); // Stop execution and wait for this operation to complete
@@ -50,13 +31,6 @@ export class TasksService {
   createTask(createTaskDTO: CreateTaskDto) {
     return this.taskRepository.createTask(createTaskDTO);
   }
-
-  // deleteTask(id: string): Task {
-  //   const found = this.getTaskById(id);
-  //   const deletedTask = this.tasks.find((task) => task.id === found.id);
-  //   this.tasks = this.tasks.filter((task) => task.id !== found.id);
-  //   return deletedTask;
-  // }
 
   async deleteTask(id: number): Promise<void> {
     await this.taskRepository.deleteTaskById(id);
