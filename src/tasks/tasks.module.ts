@@ -3,10 +3,12 @@ import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskRepository } from './task.repository';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports:[
-    TypeOrmModule.forFeature([TaskRepository]) // Make this repo available in this module
+    TypeOrmModule.forFeature([TaskRepository]), // Make this repo available in this module
+    AuthModule,
   ],
   controllers: [TasksController],
   providers: [TasksService]
