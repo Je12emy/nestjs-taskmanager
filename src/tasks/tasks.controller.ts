@@ -37,11 +37,11 @@ export class TasksController {
     return this.taskService.getTaskById(id);
   }
 
-  // @Post()
-  // @UsePipes(ValidationPipe) // This will take the body and validate it with the class validator decorators
-  // createTask(@Body() createTaskDto: CreateTaskDto): Task {
-  //   return this.taskService.createTask(createTaskDto);
-  // }
+  @Post()
+  @UsePipes(ValidationPipe) // This will take the body and validate it with the class validator decorators
+  async createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+    return await this.taskService.createTask(createTaskDto);
+  }
 
   // @Delete('/:id')
   // deleteTask(@Param('id') id: string): Task {

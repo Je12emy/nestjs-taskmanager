@@ -47,20 +47,9 @@ export class TasksService {
     return found;
   }
 
-  // createTask(createTaskDto: CreateTaskDto): Task {
-  //   const { title, description } = createTaskDto;
-
-  //   // Create a new task, use the uuid package to generate a unique id
-  //   const task: Task = {
-  //     id: uuidv4(),
-  //     title,
-  //     description,
-  //     status: TaskStatus.OPEN, // Use the predefined value of open
-  //   };
-
-  //   this.tasks.push(task);
-  //   return task;
-  // }
+  createTask(createTaskDTO: CreateTaskDto){
+    return this.taskRepository.createTask(createTaskDTO);
+  }
 
   // deleteTask(id: string): Task {
   //   const found = this.getTaskById(id);
