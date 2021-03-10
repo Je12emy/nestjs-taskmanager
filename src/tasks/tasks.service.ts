@@ -36,7 +36,6 @@ export class TasksService {
   //   return tasks;
   // }
 
-
   async getTaskById(id: number): Promise<Task> {
     const found = await this.taskRepository.findOne(id); // Stop execution and wait for this operation to complete
 
@@ -47,7 +46,7 @@ export class TasksService {
     return found;
   }
 
-  createTask(createTaskDTO: CreateTaskDto){
+  createTask(createTaskDTO: CreateTaskDto) {
     return this.taskRepository.createTask(createTaskDTO);
   }
 
@@ -57,6 +56,10 @@ export class TasksService {
   //   this.tasks = this.tasks.filter((task) => task.id !== found.id);
   //   return deletedTask;
   // }
+
+  async deleteTask(id: number): Promise<void> {
+    await this.taskRepository.deleteTaskById(id);
+  }
 
   // updateTaskStatus(id: string, status: TaskStatus): Task {
   //   const task = this.getTaskById(id);
