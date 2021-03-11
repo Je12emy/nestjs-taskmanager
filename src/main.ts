@@ -11,6 +11,9 @@ async function bootstrap() {
 
   if (process.env.NODE_ENV === 'development') {
     app.enableCors(); // Accept request from the public
+  } else {
+    app.enableCors({ origin: serverConfig.origin });
+    logger.log(`Accepting request only from ${serverConfig.origin}`);
   }
 
   const port = process.env.PORT || serverConfig.port; // PORT=3005 npm run start:dev
