@@ -7,7 +7,7 @@ import {
   Unique,
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
-import { Task } from 'src/tasks/task.entity';
+import { Task } from '../tasks/task.entity';
 
 @Entity()
 @Unique(['username'])
@@ -21,8 +21,7 @@ export class User extends BaseEntity {
   @Column()
   salt: string;
 
-
-  @OneToMany(type => Task, task => task.user, {eager: true}) // eager allows us to access the property either instatly or not, only one can be true
+  @OneToMany((type) => Task, (task) => task.user, { eager: true }) // eager allows us to access the property either instatly or not, only one can be true
   tasks: Task[];
 
   async validatePassword(password: string): Promise<boolean> {
